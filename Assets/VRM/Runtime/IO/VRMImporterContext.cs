@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UniGLTF;
 using UnityEngine;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniGLTF.Utils;
 using VRMShaders;
 using Object = UnityEngine.Object;
@@ -35,7 +35,7 @@ namespace VRM
         }
 
         #region OnLoad
-        protected override async Task OnLoadHierarchy(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime)
+        protected override async UniTask OnLoadHierarchy(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime)
         {
             Root.name = "VRM";
 
@@ -70,7 +70,7 @@ namespace VRM
             }
         }
 
-        async Task LoadMetaAsync(IAwaitCaller awaitCaller)
+        async UniTask LoadMetaAsync(IAwaitCaller awaitCaller)
         {
             if (awaitCaller == null)
             {
@@ -82,7 +82,7 @@ namespace VRM
             Meta = meta;
         }
 
-        async Task LoadFirstPerson(IAwaitCaller awaitCaller)
+        async UniTask LoadFirstPerson(IAwaitCaller awaitCaller)
         {
             var firstPerson = Root.AddComponent<VRMFirstPerson>();
             await awaitCaller.NextFrameIfTimedOut();
@@ -109,7 +109,7 @@ namespace VRM
             await awaitCaller.NextFrameIfTimedOut();
         }
 
-        async Task LoadBlendShapeMaster(IAwaitCaller awaitCaller)
+        async UniTask LoadBlendShapeMaster(IAwaitCaller awaitCaller)
         {
             BlendShapeAvatar = ScriptableObject.CreateInstance<BlendShapeAvatar>();
             BlendShapeAvatar.name = "BlendShape";
@@ -139,7 +139,7 @@ namespace VRM
             proxy.BlendShapeAvatar = BlendShapeAvatar;
         }
 
-        async Task<BlendShapeClip> LoadBlendShapeBind(glTF_VRM_BlendShapeGroup group, Dictionary<Mesh, Transform> transformMeshTable, IAwaitCaller awaitCaller)
+        async UniTask<BlendShapeClip> LoadBlendShapeBind(glTF_VRM_BlendShapeGroup group, Dictionary<Mesh, Transform> transformMeshTable, IAwaitCaller awaitCaller)
         {
             var asset = ScriptableObject.CreateInstance<BlendShapeClip>();
             var groupName = group.name;
@@ -291,7 +291,7 @@ namespace VRM
         public BlendShapeAvatar BlendShapeAvatar;
         public VRMMetaObject Meta;
 
-        public async Task<VRMMetaObject> ReadMetaAsync(IAwaitCaller awaitCaller, bool createThumbnail = false)
+        public async UniTask<VRMMetaObject> ReadMetaAsync(IAwaitCaller awaitCaller, bool createThumbnail = false)
         {
             if (awaitCaller == null)
             {

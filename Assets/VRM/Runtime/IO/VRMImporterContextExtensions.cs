@@ -1,4 +1,5 @@
 ﻿using VRMShaders;
+using UniGLTF;
 
 namespace VRM
 {
@@ -8,7 +9,7 @@ namespace VRM
         {
             var task = context.ReadMetaAsync(new ImmediateCaller(), createThumbnail);
             task.Wait();
-            return task.Result;
+            return task.GetAwaiter().GetResult();
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Profiling;
 using VRMShaders;
 
@@ -75,7 +75,7 @@ namespace UniGLTF
         };
 
         #region Load. Build unity objects
-        public virtual async Task<RuntimeGltfInstance> LoadAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime = null)
+        public virtual async UniTask<RuntimeGltfInstance> LoadAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime = null)
         {
             if (awaitCaller == null)
             {
@@ -129,7 +129,7 @@ namespace UniGLTF
             return RuntimeGltfInstance.AttachTo(Root, this);
         }
 
-        public virtual async Task LoadAnimationAsync(IAwaitCaller awaitCaller)
+        public virtual async UniTask LoadAnimationAsync(IAwaitCaller awaitCaller)
         {
             if (GLTF.animations != null && GLTF.animations.Any())
             {
@@ -146,7 +146,7 @@ namespace UniGLTF
         /// <summary>
         /// AnimationClips を AnimationComponent に載せる
         /// </summary>
-        protected virtual async Task SetupAnimationsAsync(IAwaitCaller awaitCaller)
+        protected virtual async UniTask SetupAnimationsAsync(IAwaitCaller awaitCaller)
         {
             if (AnimationClipFactory.LoadedClipKeys.Count == 0) return;
 
@@ -165,7 +165,7 @@ namespace UniGLTF
             await awaitCaller.NextFrame();
         }
 
-        protected virtual async Task LoadGeometryAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime)
+        protected virtual async UniTask LoadGeometryAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime)
         {
             var inverter = InvertAxis.Create();
 
@@ -263,7 +263,7 @@ namespace UniGLTF
             await awaitCaller.NextFrame();
         }
 
-        public async Task LoadTexturesAsync(IAwaitCaller awaitCaller)
+        public async UniTask LoadTexturesAsync(IAwaitCaller awaitCaller)
         {
             if (awaitCaller == null)
             {
@@ -278,7 +278,7 @@ namespace UniGLTF
             }
         }
 
-        public async Task LoadMaterialsAsync(IAwaitCaller awaitCaller)
+        public async UniTask LoadMaterialsAsync(IAwaitCaller awaitCaller)
         {
             if (awaitCaller == null)
             {
@@ -303,13 +303,13 @@ namespace UniGLTF
             }
         }
 
-        protected virtual Task OnLoadHierarchy(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime)
+        protected virtual UniTask OnLoadHierarchy(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime)
         {
             // do nothing
-            return Task.FromResult<object>(null);
+            return UniTask.FromResult<object>(null);
         }
 
-        async Task<MeshWithMaterials> BuildMeshAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime, MeshData meshData, int i)
+        async UniTask<MeshWithMaterials> BuildMeshAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> MeasureTime, MeshData meshData, int i)
         {
             using (MeasureTime("BuildMesh"))
             {

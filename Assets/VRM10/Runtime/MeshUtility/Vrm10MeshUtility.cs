@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UniHumanoid;
 using UnityEngine;
-
+using Cysharp.Threading.Tasks;
+using UniGLTF;
 
 namespace UniVRM10
 {
@@ -77,7 +79,7 @@ namespace UniVRM10
             }
             return true;
         }
-
+        
         private void _ProcessFirstPerson(Transform firstPersonBone, SkinnedMeshRenderer smr)
         {
             var task = VRM10ObjectFirstPerson.CreateErasedMeshAsync(
@@ -85,7 +87,7 @@ namespace UniVRM10
                 firstPersonBone,
                 new VRMShaders.ImmediateCaller());
             task.Wait();
-            var mesh = task.Result;
+            var mesh = task.GetAwaiter().GetResult();
             if (mesh != null)
             {
                 smr.sharedMesh = mesh;

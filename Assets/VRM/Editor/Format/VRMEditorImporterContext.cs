@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UniGLTF;
 using UnityEditor;
 using UnityEngine;
@@ -82,25 +83,32 @@ namespace VRM
             // convert images(metallic roughness, occlusion map)
             //
             var task = m_context.LoadMaterialsAsync(new ImmediateCaller());
-            if (!task.IsCompleted)
+            if (!task.Status.IsCompleted())
             {
                 throw new Exception();
             }
-            if (task.IsFaulted)
+            if (task.Status.IsFaulted())
             {
-                if (task.Exception is AggregateException ae && ae.InnerExceptions.Count == 1)
+                try
                 {
-                    throw ae.InnerException;
+                    task.GetAwaiter().GetResult();
                 }
-                else
+                catch (Exception e)
                 {
-                    throw task.Exception;
+                    if (e is AggregateException ae && ae.InnerExceptions.Count == 1)
+                    {
+                        throw ae.InnerException;
+                    }
+                    else
+                    {
+                        throw e;
+                    }
                 }
             }
 
             // Convert thumbnail image
             var task2 = m_context.ReadMetaAsync(new ImmediateCaller());
-            if (!task2.IsCompleted || task2.IsCanceled || task2.IsFaulted)
+            if (!task2.Status.IsCompleted() || task2.Status.IsCanceled() || task2.Status.IsFaulted())
             {
                 throw new Exception();
             }

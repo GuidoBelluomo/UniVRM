@@ -1,6 +1,8 @@
 {
     "name": "VRMShaders.GLTF.IO.Runtime",
-    "references": [],
+    "references": [
+        "UniTask"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

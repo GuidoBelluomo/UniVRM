@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniGLTF;
 using UniGLTF.Extensions.VRMC_vrm_animation;
 using UniHumanoid;
@@ -234,7 +234,7 @@ namespace UniVRM10
             return curve;
         }
 
-        public override async Task<RuntimeGltfInstance> LoadAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> measureTime = null)
+        public override async UniTask<RuntimeGltfInstance> LoadAsync(IAwaitCaller awaitCaller, Func<string, IDisposable> measureTime = null)
         {
             // Expression は AnimationClip を分ける。
             // glTFData から関連 Animation を取り除いて、取っておく。

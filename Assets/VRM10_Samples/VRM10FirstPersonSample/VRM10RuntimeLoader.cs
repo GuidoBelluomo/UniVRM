@@ -1,7 +1,7 @@
 ﻿#pragma warning disable 0414
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniGLTF;
 using UnityEngine;
 
@@ -84,7 +84,7 @@ namespace UniVRM10.FirstPersonSample
             SetupTarget(m_target);
         }
 
-        async Task<Vrm10Instance> LoadAsync(string path, VRMShaders.IAwaitCaller awaitCaller)
+        async UniTask<Vrm10Instance> LoadAsync(string path, VRMShaders.IAwaitCaller awaitCaller)
         {
             var instance = await Vrm10.LoadPathAsync(path, awaitCaller: awaitCaller);
 

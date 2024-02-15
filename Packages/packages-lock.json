@@ -1,8 +1,15 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
+    },
     "com.unity.burst": {
-      "version": "1.8.4",
-      "depth": 1,
+      "version": "1.8.11",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
@@ -17,7 +24,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.21",
+      "version": "3.0.26",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -51,7 +58,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
-      "version": "12.1.12",
+      "version": "12.1.13",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
@@ -61,14 +68,14 @@
       }
     },
     "com.unity.render-pipelines.universal": {
-      "version": "12.1.12",
+      "version": "12.1.13",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
-        "com.unity.burst": "1.8.4",
-        "com.unity.render-pipelines.core": "12.1.12",
-        "com.unity.shadergraph": "12.1.12"
+        "com.unity.burst": "1.8.9",
+        "com.unity.render-pipelines.core": "12.1.13",
+        "com.unity.shadergraph": "12.1.13"
       }
     },
     "com.unity.searcher": {
@@ -79,11 +86,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.shadergraph": {
-      "version": "12.1.12",
+      "version": "12.1.13",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "12.1.12",
+        "com.unity.render-pipelines.core": "12.1.13",
         "com.unity.searcher": "4.9.1"
       }
     },
