@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniGLTF;
 using UniHumanoid;
 using UnityEngine;
@@ -344,7 +344,7 @@ namespace VRM.SimpleViewer
             await LoadBytesAsync(path, bytes);
         }
 
-        public async Task LoadBytesAsync(string path, byte[] bytes)
+        public async UniTask LoadBytesAsync(string path, byte[] bytes)
         {
             var size = bytes != null ? bytes.Length : 0;
             Debug.Log($"LoadModelAsync: {path}: {size}bytes");

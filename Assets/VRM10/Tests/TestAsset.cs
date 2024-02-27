@@ -1,4 +1,5 @@
 using System.IO;
+using UniGLTF;
 using UnityEngine;
 
 namespace UniVRM10
@@ -18,7 +19,7 @@ namespace UniVRM10
         {
             var task = Vrm10.LoadPathAsync(AliciaPath, canLoadVrm0X: true);
             task.Wait();
-            var instance = task.Result;
+            var instance = task.GetAwaiter().GetResult();
 
             return instance.GetComponent<Vrm10Instance>();
         }

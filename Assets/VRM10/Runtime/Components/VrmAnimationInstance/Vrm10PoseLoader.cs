@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniGLTF;
 using UniJSON;
 using UnityEngine;
@@ -219,7 +219,7 @@ namespace UniVRM10
             }
         }
 
-        public static async Task<Vrm10AnimationInstance> LoadVrmAnimationPose(string text)
+        public static async UniTask<Vrm10AnimationInstance> LoadVrmAnimationPose(string text)
         {
             using GltfData data = GlbLowLevelParser.ParseGltf(
                 "tmp.vrma",

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniGLTF;
 using UnityEngine;
 using VRMShaders;
@@ -11,7 +11,7 @@ namespace VRM
     {
         public delegate IMaterialDescriptorGenerator MaterialGeneratorCallback(VRM.glTF_VRM_extensions vrm);
         public delegate void MetaCallback(VRMMetaObject meta);
-        public static async Task<RuntimeGltfInstance> LoadAsync(string path,
+        public static async UniTask<RuntimeGltfInstance> LoadAsync(string path,
             IAwaitCaller awaitCaller = null,
             MaterialGeneratorCallback materialGeneratorCallback = null,
             MetaCallback metaCallback = null,
@@ -67,7 +67,7 @@ namespace VRM
         }
 
 
-        public static async Task<RuntimeGltfInstance> LoadBytesAsync(string path,
+        public static async UniTask<RuntimeGltfInstance> LoadBytesAsync(string path,
             byte[] bytes,
             IAwaitCaller awaitCaller = null,
             MaterialGeneratorCallback materialGeneratorCallback = null,

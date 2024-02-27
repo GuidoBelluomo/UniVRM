@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VRM.FastSpringBones.Blittables;
 using VRM.FastSpringBones.Components;
@@ -16,7 +16,7 @@ namespace VRM
     /// </summary>
     public static class FastSpringBoneReplacer
     {
-        public static async Task ReplaceAsync(GameObject gameObject, IAwaitCaller awaitCaller = null, CancellationToken token = default)
+        public static async UniTask ReplaceAsync(GameObject gameObject, IAwaitCaller awaitCaller = null, CancellationToken token = default)
         {
             var service = FastSpringBoneService.Instance;
             var springBones = gameObject.GetComponentsInChildren<VRMSpringBone>();
