@@ -82,32 +82,25 @@ namespace VRM
             //
             // convert images(metallic roughness, occlusion map)
             //
-            var task = m_context.LoadMaterialsAsync(new ImmediateCaller());
+            var immediateCaller = new ImmediateCaller();
+            var task = m_context.LoadMaterialsAsync(immediateCaller);
             if (!task.Status.IsCompleted())
             {
                 throw new Exception();
             }
             if (task.Status.IsFaulted())
             {
-                try
+                Exception e = immediateCaller.Exception;
+                if (e is AggregateException ae && ae.InnerExceptions.Count == 1)
                 {
-                    task.GetAwaiter().GetResult();
+                    throw ae.InnerException;
                 }
-                catch (Exception e)
-                {
-                    if (e is AggregateException ae && ae.InnerExceptions.Count == 1)
-                    {
-                        throw ae.InnerException;
-                    }
-                    else
-                    {
-                        throw e;
-                    }
-                }
+
+                throw e;
             }
 
             // Convert thumbnail image
-            var task2 = m_context.ReadMetaAsync(new ImmediateCaller());
+            var task2 = m_context.ReadMetaAsync(immediateCaller);
             if (!task2.Status.IsCompleted() || task2.Status.IsCanceled() || task2.Status.IsFaulted())
             {
                 throw new Exception();
